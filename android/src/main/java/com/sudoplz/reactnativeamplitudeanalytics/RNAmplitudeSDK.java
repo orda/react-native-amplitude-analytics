@@ -3,7 +3,6 @@ package com.sudoplz.reactnativeamplitudeanalytics;
 import com.amplitude.api.Amplitude;
 import com.amplitude.api.Identify;
 
-import android.app.Activity;
 import android.app.Application;
 
 import com.facebook.react.bridge.NativeModule;
@@ -25,13 +24,10 @@ import org.json.JSONObject;
 import java.util.Map;
 
 public class RNAmplitudeSDK extends ReactContextBaseJavaModule {
-
-  private Activity mActivity = null;
   private Application mApplication = null;
 
   public RNAmplitudeSDK(ReactApplicationContext reactContext, Application mApplication) {
     super(reactContext);
-    this.mActivity = getCurrentActivity();
     this.mApplication = mApplication;
   }
 
@@ -178,6 +174,19 @@ public class RNAmplitudeSDK extends ReactContextBaseJavaModule {
     }
     return array;
   }
+
+  @ReactMethod
+  public void setUserProperty(String property, String value) {
+    Identify identify = new Identify().set(property, value);
+    Amplitude.getInstance().identify(identify);
+  }
+
+  @ReactMethod
+  public void unsetUserProperty(String property) {
+    Identify identify = new Identify().unset(property);
+    Amplitude.getInstance().identify(identify);
+  }
+
 
   @ReactMethod
   public void addToUserProperty(String property, int value) {

@@ -65,6 +65,19 @@ RCT_EXPORT_METHOD(logRevenue:(NSString *)productIdentifier quantity:(int)quantit
      [[Amplitude instance] logRevenueV2:revenue];
 }
 
+RCT_EXPORT_METHOD(setUserProperty:(NSString *)property value:(NSString *)value)
+{
+     AMPIdentify *identify = [[AMPIdentify identify] set:property value:value];
+     [[Amplitude instance] identify:identify];
+}
+
+RCT_EXPORT_METHOD(unsetUserProperty:(NSString *)property)
+{
+     AMPIdentify *identify = [[AMPIdentify identify] unset:property];
+     [[Amplitude instance] identify:identify];
+}
+
+
 RCT_EXPORT_METHOD(addToUserProperty:(NSString *)property value:(int)value)
 {
      AMPIdentify *identify = [[AMPIdentify identify] add:property value:[NSNumber numberWithInt:value]];
