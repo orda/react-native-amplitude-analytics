@@ -1,5 +1,5 @@
 {
-  "name": "react-native-amplitude-analytics",
+  "name": "@orda/react-native-amplitude-analytics",
   "version": "0.2.6",
   "description": "React Native iOS and Android wrapper for Amplitude",
   "keywords": [
@@ -28,7 +28,5 @@
   "peerDependencies": {
     "react-native": "*"
   },
-  "dependencies": {
-    "fbjs": "^0.8.5"
-  }
+  "dependencies": {}
 }

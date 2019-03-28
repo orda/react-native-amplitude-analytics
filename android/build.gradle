@@ -1,31 +1,47 @@
-apply plugin: 'com.android.library'
-
-def DEFAULT_COMPILE_SDK_VERSION = 23
-def DEFAULT_BUILD_TOOLS_VERSION = "23.0.1"
-def DEFAULT_TARGET_SDK_VERSION = 22
+def DEFAULT_COMPILE_SDK_VERSION = 26
+def DEFAULT_BUILD_TOOLS_VERSION = "28.0.3"
+def DEFAULT_TARGET_SDK_VERSION = 26
 def DEFAULT_AMPLITUDE_SDK_VERSION = "2.19.1"
+
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.3.2'
+    }
+}
+
+apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion rootProject.hasProperty('compileSdkVersion') ? rootProject.compileSdkVersion : DEFAULT_COMPILE_SDK_VERSION
-      buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : DEFAULT_BUILD_TOOLS_VERSION
-
+    buildToolsVersion rootProject.hasProperty('buildToolsVersion') ? rootProject.buildToolsVersion : DEFAULT_BUILD_TOOLS_VERSION
 
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion rootProject.hasProperty('targetSdkVersion') ? rootProject.targetSdkVersion : DEFAULT_TARGET_SDK_VERSION
-
         versionCode 1
         versionName "1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
     }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+repositories {
+    google()
+    jcenter()
 }
 
 def amplitudeVersion = rootProject.hasProperty('amplitudeLibVersion') ? rootProject.amplitudeLibVersion : DEFAULT_AMPLITUDE_SDK_VERSION
 
 dependencies {
-    implementation 'com.facebook.react:react-native:+'
+    implementation'com.facebook.react:react-native:+'
     implementation "com.amplitude:android-sdk:$amplitudeVersion"
-
 }
