@@ -1,5 +1,9 @@
 export default class Amplitude {
-  constructor(apiKey: string, trackSessionEvents?: boolean, eventPrefix?: string);
+  constructor(
+    apiKey: string,
+    trackSessionEvents?: boolean,
+    eventPrefix?: string
+  );
 
   // --------------------------------------------------
   // Identify
@@ -9,6 +13,7 @@ export default class Amplitude {
   setOptOut(optOut: boolean): void;
   clearUserProperties(): void;
   getDeviceId(): Promise<string>;
+  getSessionId(): Promise<string>;
   regenerateDeviceId(): void;
   setLogEventPrefix(prefix: string): void;
 
@@ -17,12 +22,21 @@ export default class Amplitude {
   // --------------------------------------------------
 
   logEvent(name: string, properties?: Record<string, any>): void;
-  logEventWithTimestamp(name: string, timestamp: number, properties?: Record<string, any>): void;
+  logEventWithTimestamp(
+    name: string,
+    timestamp: number,
+    properties?: Record<string, any>
+  ): void;
 
   // --------------------------------------------------
   // Revenue
   // --------------------------------------------------
-  logRevenue(productIdentifier: string, quantity: number, amount: number, receipt?: string): void;
+  logRevenue(
+    productIdentifier: string,
+    quantity: number,
+    amount: number,
+    receipt?: string
+  ): void;
   addToUserProperty(property: string, amount: number): void;
   setUserPropertyOnce(property: string, value: string | number | null): void;
 }
